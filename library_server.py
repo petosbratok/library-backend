@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
@@ -111,7 +111,6 @@ async def get_authors(db: Session = Depends(get_db)):
     authors = db.query(Author).all()
     return authors
 
-# Метод для сброса данных к предоставленным
 @app.post("/reset_data/")
 async def reset_data(db: Session = Depends(get_db)):
     from data_dump import data_dump
